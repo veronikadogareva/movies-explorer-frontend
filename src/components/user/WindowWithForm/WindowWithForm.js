@@ -10,9 +10,9 @@ function WindowWithForm({ logo, title, textButton, textCaption, textLink, linkPa
       <h2 className="window__title">{title}</h2>
       <form className="window__form">
         <ul className="window__form-group">
-        {children}
+          {children}
         </ul>
-        <Button text={textButton}/>
+        <Button text={textButton} />
       </form>
       <div className="window__group">
         <span className="window__caption window__text">{textCaption}</span>

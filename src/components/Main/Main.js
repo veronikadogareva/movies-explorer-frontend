@@ -5,14 +5,14 @@ import NavTab from './NavTab/NavTab';
 import AboutProject from './AboutProject/AboutProject';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
-function Main({photoStudent}) {
+function Main({ photoStudent }) {
   return (
     <main className="main">
       <Promo />
       <NavTab />
       <AboutProject />
       <Techs />
-      <AboutMe img={photoStudent}/>
+      <AboutMe img={photoStudent} />
     </main>
   )
 }

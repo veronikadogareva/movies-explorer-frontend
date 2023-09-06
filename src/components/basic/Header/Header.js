@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import Navigation from './Navigation/Navigation';
 function Header({ logo, alt, loggedIn }) {
-  
+
   const location = useLocation();
-  
+
   return (
     <header className={`header ${location.pathname === "/" && "header_path_main"}`}>
       <div className="header__group">

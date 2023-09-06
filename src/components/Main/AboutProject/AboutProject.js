@@ -16,15 +16,15 @@ function AboutProject() {
         </li>
       </ul>
       <table className="about-project__table">
-      <tbody>
-        <tr>
-          <td className="about-project__column about-project__column_first">1 неделя</td>
-          <td className="about-project__column about-project__column_second">4 недели</td>
-        </tr>
-        <tr>
-          <td className="about-project__caption">Back-end</td>
-          <td className="about-project__caption">Front-end</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td className="about-project__column about-project__column_first">1 неделя</td>
+            <td className="about-project__column about-project__column_second">4 недели</td>
+          </tr>
+          <tr>
+            <td className="about-project__caption">Back-end</td>
+            <td className="about-project__caption">Front-end</td>
+          </tr>
         </tbody>
       </table>
     </section>

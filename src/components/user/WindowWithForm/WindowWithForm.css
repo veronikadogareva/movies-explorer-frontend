@@ -56,9 +56,11 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.window__button:hover{
+
+.window__button:hover {
   opacity: 0.8;
 }
+
 .window__group {
   margin-bottom: 70px;
 }
@@ -73,9 +75,11 @@
   color: #FF6838;
   transition: all 0.2s ease-in-out;
 }
-.window__link:hover{
+
+.window__link:hover {
   opacity: 0.7;
 }
+
 @media screen and (max-width:768px) {
   .window__logo {
     margin-top: 232px;
@@ -103,10 +107,12 @@
     margin-bottom: 80px;
     text-align: center;
   }
+
   .window__form {
     height: 468px;
     margin-bottom: 14px;
   }
+
   .window__text {
     font-size: 12px;
     line-height: 14.52px;

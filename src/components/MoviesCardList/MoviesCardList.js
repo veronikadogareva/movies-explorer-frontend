@@ -6,9 +6,9 @@ function MoviesCardList() {
   const location = useLocation();
   return (
     <ul className={`movies-card-list ${location.pathname === '/saved-movies' && "movies-card-list_saved"}`}>
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
     </ul>
   )
 }

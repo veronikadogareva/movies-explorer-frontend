@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import './Menu.css';
 
-function Menu({ isMenu, onClose}) {
+function Menu({ isMenu, onClose }) {
   return (
     <>
       <div className={`menu__overlay ${isMenu && "menu__overlay_opened"}`} />

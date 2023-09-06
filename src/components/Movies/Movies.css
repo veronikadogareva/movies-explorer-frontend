@@ -1,33 +1,37 @@
-.movies{
+.movies {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 70px;
 }
-.movies__button{
+
+.movies__button {
   max-width: 1140px;
   width: 100%;
   height: 36px;
   border: none;
   margin: 50px 0 80px;
   padding: 0;
-  background-color:#F9F9F9;
+  background-color: #F9F9F9;
   font-size: 12px;
   font-weight: 500;
   line-height: 14.52px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.movies__button:hover{
+
+.movies__button:hover {
   opacity: 0.8;
 }
+
 @media screen and (max-width:768px) {
-  .movies{
+  .movies {
     margin: 0 30px;
   }
 }
+
 @media screen and (max-width:320px) {
-  .movies{
+  .movies {
     margin: 0 10px;
   }
 }

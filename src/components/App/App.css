@@ -1,8 +1,9 @@
 .page {
   font-family: 'Inter', 'Times New Roman', Arial;
   color: black;
-  cursor:default;
+  cursor: default;
 }
-*{
+
+* {
   scroll-behavior: smooth;
 }

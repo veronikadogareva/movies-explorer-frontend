@@ -18,22 +18,26 @@
   max-width: 730px;
   text-align: center;
 }
+
 @media screen and (max-width:768px) {
-  .promo{
+  .promo {
     height: 784px;
     background-position: center top 224px;
   }
+
   .promo__title {
     margin-top: 326px;
   }
 }
+
 @media screen and (max-width:400px) {
-  .promo{
+  .promo {
     height: 570px;
     background-position: center top 142px;
     background-size: 248px;
   }
-  .promo__title{
+
+  .promo__title {
     margin-top: 210px;
     font-size: 31px;
     line-height: 39px;

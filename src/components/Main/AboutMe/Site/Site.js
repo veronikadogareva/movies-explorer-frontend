@@ -1,6 +1,6 @@
 import React from 'react';
 import './Site.css';
-function Site({href, text}) {
+function Site({ href, text }) {
   return (
     <li className="about-me__site">
       <a className="about-me__link-site" href={href}>{text}</a>

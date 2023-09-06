@@ -5,7 +5,7 @@ import Site from './Site/Site';
 function AboutMe({ img }) {
   return (
     <section className="about-me" id="student">
-      <MainTitle text="Студент" moreClass="main__title_section_about-me"/>
+      <MainTitle text="Студент" moreClass="main__title_section_about-me" />
       <div className="about-me__container">
         <ul className="about-me__info">
           <li className="about-me__item"><h3 className="about-me__name">Виталий</h3></li>

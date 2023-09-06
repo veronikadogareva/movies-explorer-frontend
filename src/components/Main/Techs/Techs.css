@@ -119,9 +119,11 @@
     line-height: 14.52px;
     letter-spacing: -0.48px;
   }
+
   .techs__icon:nth-child(2n) {
     margin-right: 0;
   }
+
   .techs__icon:nth-child(-n+2) {
     margin-top: 0;
   }

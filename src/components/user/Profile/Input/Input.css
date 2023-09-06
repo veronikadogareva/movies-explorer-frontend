@@ -39,8 +39,9 @@
   .profile__input {
     max-width: 120px;
   }
+
   .profile__label:last-of-type {
     margin-bottom: 277px;
   }
-  
+
 }

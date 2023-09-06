@@ -1,6 +1,6 @@
 import React from 'react';
 import './Input.css';
-function Input({type, key, labelText,error}) {
+function Input({ type, key, labelText, error }) {
   return (
     <li className="form__item">
       <label className="form__label" for={key}>{labelText}</label>

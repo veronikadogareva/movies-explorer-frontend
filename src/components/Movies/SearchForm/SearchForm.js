@@ -5,7 +5,7 @@ function SearchForm() {
   return (
     <section className="search-form">
       <form className="search-form__form">
-        <input className="search-form__input" id="search-input" type="text" name="search" placeholder="Фильм"/>
+        <input className="search-form__input" id="search-input" type="text" name="search" placeholder="Фильм" />
         <button className="search-form__button" type="submit" />
       </form>
       <FilterCheckbox />

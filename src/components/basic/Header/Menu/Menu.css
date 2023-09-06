@@ -1,0 +1,134 @@
+.menu__overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  visibility: hidden;
+  transition: all 0.2s linear;
+  opacity: 0;
+}
+
+.menu__overlay_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu {
+  position: fixed;
+  list-style: none;
+  top: 0;
+  right: 0;
+  width: 67.7%;
+  height: 100%;
+  margin: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  z-index: 2;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  overflow-y: auto;
+}
+
+.menu_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu__item {
+  display: contents;
+}
+
+.menu__button {
+  border: none;
+  background-color: inherit;
+  padding: 0;
+  margin: 23.16px 23.16px 108.16px 0;
+  width: 30px;
+  height: 30px;
+  align-self: flex-end;
+  background-image: url('../../../../images/menu-icon.svg');
+  background-size: 100%;
+  background-position: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu__button:hover {
+  opacity: 0.7;
+}
+
+.menu__link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: 500px;
+  line-height: 21.78px;
+  margin-bottom: 22px;
+  height: 22px;
+  padding-bottom: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu__link:hover {
+  opacity: 0.7;
+}
+
+.menu__link_active {
+  border-bottom: 2px solid black;
+}
+
+.menu__button-link {
+  position: absolute;
+  top: 0;
+  margin: 902px 0 90px;
+  padding: 0 0 90px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.menu__button-link_inner{
+  background-color: #F9F9F9;
+  color: black;
+  border-radius: 20px;
+  height: 32px;
+  width: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu__button-link:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width:320px) {
+  .menu__overlay {
+    display: none;
+  }
+
+  .menu {
+    width: 100%;
+    height: 100%;
+  }
+
+  .menu__button {
+    margin: 20.16px 20.16px 106.16px 0;
+  }
+
+  .menu__link {
+    margin-bottom: 15px;
+    height: 29px;
+  }
+
+  .menu__button-link {
+    margin-top: 429px;
+  }
+}

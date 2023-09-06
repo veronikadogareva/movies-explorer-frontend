@@ -1,0 +1,109 @@
+.movies-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  max-width: 270px;
+  max-height: 218px;
+  height: 100%;
+  box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.05);
+}
+
+.movies-card__image {
+  width: 270px;
+  height: 151px;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.movies-card__container {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: 14px 12px 10px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.movies-card__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 15.73px;
+}
+
+.movies-card__button {
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.movies-card__button:hover{
+  opacity: 0.8;
+}
+.movies-card__button_type_delete {
+  background-image: url('../../images/icon__x.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: none;
+  border-radius: none;
+}
+
+.movies-card__inner-button {
+  width: 12px;
+  height: 12px;
+  background-color: #F9F9F9;
+  border-radius: 50%;
+  margin: 0;
+  transition: background-color 0.2s ease-out;
+}
+
+.movies-card__inner-button_active {
+  background-color: #2BE080;
+}
+
+.movies-card__duration {
+  margin: 0 0 14px 12px;
+  color: #A0A0A0;
+  font-size: 11px;
+  line-height: 13.31px;
+}
+
+@media screen and (max-width:768px) {
+  .movies-card {
+    max-width: 339px;
+    max-height: 257px;
+  }
+
+  .movies-card__image {
+    height: 190px;
+    width: 339px;
+  }
+}
+
+@media screen and (max-width:320px) {
+  .movies-card {
+    max-width: 300px;
+    max-height: 235px;
+  }
+
+  .movies-card__image {
+    height: 168px;
+  }
+
+  .movies-card__container {
+    padding: 12px 14px 10px;
+  }
+
+  .movies-card__duration {
+    margin: 0 0 12px 14px;
+  }
+}

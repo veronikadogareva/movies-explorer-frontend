@@ -1,0 +1,64 @@
+.about-me__site {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid #E8E8E8;
+  margin-bottom: 20px;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -1.2px;
+}
+
+.about-me__site:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.about-me__link-site {
+  text-decoration: none;
+  color: black;
+  transition: all 0.2s ease-in-out;
+}
+
+.about-me__link-site:hover {
+  opacity: 0.7;
+}
+
+.about-me__link-site_type_arrow {
+  padding-top: 5px;
+}
+
+@media screen and (max-width:768px) {
+  .about-me__site {
+    font-size: 28px;
+    line-height: 50px;
+    letter-spacing: -1.12px;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .about-me__site {
+    height: 28px;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+    max-width: 292px;
+  }
+
+  .about-me__site:last-of-type {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .about-me__link-site {
+    text-decoration: none;
+    color: black;
+  }
+  .about-me__link-site_type_arrow {
+    padding-top: 0;
+  }
+}

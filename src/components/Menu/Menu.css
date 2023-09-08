@@ -1,0 +1,151 @@
+.overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  visibility: hidden;
+  transition: all 0.2s linear;
+  opacity: 0;
+}
+
+.overlay_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu {
+  position: fixed;
+  list-style: none;
+  top: 0;
+  right: 0;
+  width: 67.7%;
+  height: 100%;
+  margin: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  z-index: 2;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  overflow-y: auto;
+}
+
+.menu_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu__item {
+  display: contents;
+}
+
+.menu__item:first-child .menu__link {
+  margin-top: 159px;
+}
+
+.menu__button {
+  position: absolute;
+  top: 23.16px;
+  right: 23.16px;
+  border: none;
+  background-color: inherit;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../images/menu-icon.svg');
+  background-size: 100%;
+  background-position: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu__button:hover {
+  opacity: 0.7;
+}
+
+.menu__navigation {
+  display: contents;
+}
+
+.menu__link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: 500px;
+  line-height: 21.78px;
+  margin-bottom: 24px;
+  min-height: 22px;
+  padding-bottom: 2px;
+  transition: all 0.2s ease-in-out;
+  border-bottom: 2px solid white;
+}
+
+.menu__link:hover {
+  opacity: 0.7;
+}
+
+.menu__link_active {
+  border-bottom: 2px solid black;
+}
+
+.menu__button-link {
+  /* position: absolute;
+  top: 0; */
+  margin: 597px 0 0;
+  padding: 0 0 90px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu__button-link-inner {
+  background-color: #F9F9F9;
+  color: black;
+  border-radius: 20px;
+  height: 32px;
+  width: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu__button-link:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width:320px) {
+  .menu__overlay {
+    display: none;
+  }
+
+  .menu {
+    width: 100%;
+    height: 100%;
+  }
+
+  .menu__button {
+    top: 14.16px;
+    right: 14.16px;
+  }
+  .menu__item:first-child .menu__link {
+    margin-top: 144px;
+  }
+  .menu__link {
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+  }
+
+  .menu__button-link {
+    margin: 444px 0 0;
+    padding: 0 0 46px;
+  }
+
+}

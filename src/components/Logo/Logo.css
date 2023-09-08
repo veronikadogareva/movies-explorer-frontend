@@ -1,0 +1,24 @@
+.logo{
+  display: contents;
+}
+.logo__image {
+  height: 38px;
+  width: 38px;
+  transition: all 0.2s ease-in-out;
+  align-self: flex-start;
+}
+.logo__image:hover{
+  opacity: 0.7;
+}
+@media screen and (max-width:768px) {
+  .logo__image {
+    margin-top: 3px;
+  }
+}
+@media screen and (max-width:320px) {
+  .logo__image {
+    align-self: center;
+    margin-bottom: 3px;
+  }
+
+}

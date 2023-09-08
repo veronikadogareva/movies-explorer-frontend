@@ -16,7 +16,7 @@ function MoviesCard() {
           <h2 className="movies-card__title">Пианист</h2>
           {location.pathname === "/movies" ? (
             <button className="movies-card__button" onClick={handleClick}>
-              <div className={`movies-card__inner-button ${isSaved && "movies-card__inner-button_active"}`} />
+              <div className={`movies-card__inner-button ${isSaved ? "movies-card__inner-button_active" : ""}`} />
             </button>) : (
             <button className="movies-card__button movies-card__button_type_delete" />
           )}

@@ -30,6 +30,7 @@
   font-size: 13px;
   font-weight: 500;
   line-height: 15.73px;
+  max-width: 220px;
 }
 
 .movies-card__button {
@@ -89,6 +90,9 @@
     height: 190px;
     max-width: 339px;
   }
+  .movies-card__title {
+    max-width: 285px;
+  }
 }
 
 @media screen and (max-width:320px) {
@@ -104,7 +108,9 @@
   .movies-card__container {
     padding: 14px 12px 10px;
   }
-
+  .movies-card__title {
+    max-width: 250px;
+  }
   .movies-card__duration {
     margin: 0 0 13.7px 12px;
     min-height: 13px;

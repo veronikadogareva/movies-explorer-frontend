@@ -81,6 +81,9 @@
 }
 
 @media screen and (max-width:768px) {
+  .navigation__item {
+    display: contents;
+  }
   .navigation__link {
     display: none;
   }

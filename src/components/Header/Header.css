@@ -63,7 +63,7 @@
   opacity: 0.8;
 }
 
-header__item {
+.header__item {
   display: contents;
 }
 
@@ -72,6 +72,7 @@ header__item {
     padding: 15px 30px;
     min-height: 44px;
   }
+  
 }
 
 @media screen and (max-width:320px) {

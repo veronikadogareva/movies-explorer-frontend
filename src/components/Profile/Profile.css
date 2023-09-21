@@ -23,15 +23,6 @@
   flex-grow: 1;
 }
 
-.profile__error {
-  color: #FF004C;
-  font-size: 11px;
-  line-height: 13.31px;
-  margin: auto auto 20px auto;
-  height: 14px;
-  text-align: center;
-}
-
 .profile__button {
   border: none;
   background-color: white;

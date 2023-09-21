@@ -2,6 +2,7 @@
   font-family: 'Inter', 'Times New Roman', Arial;
   color: black;
   cursor: default;
+  min-height: 100vh;
 }
 
 * {

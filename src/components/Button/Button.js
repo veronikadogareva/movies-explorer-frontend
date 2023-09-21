@@ -1,8 +1,11 @@
 import React from 'react';
 import './Button.css';
-function Button({ text }) {
+function Button({ text, isDisable, serverError }) {
   return (
-    <button className="button" type="submit">{text}</button>
+    <>
+    <span className="error">{serverError}</span>
+    <button className="button" type="submit" disabled={isDisable}>{text}</button>
+    </>
   )
 }
 export default Button;

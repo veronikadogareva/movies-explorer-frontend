@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 import Logo from '../Logo/Logo';
-function Header({ logo, alt, loggedIn }) {
-
+import { AppContext } from '../../contexts/AppContext';
+function Header() {
+  const { loggedIn } = useContext(AppContext);
   const location = useLocation();
 
   return (

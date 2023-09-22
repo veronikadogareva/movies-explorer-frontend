@@ -77,7 +77,7 @@ class MainApi {
   checkTo
 }
 const mainApi = new MainApi({
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'http://api.veronika.movie.nomoredomainsicu.ru',
   headers: {
     // Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
     'Content-Type': 'application/json'

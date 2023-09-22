@@ -242,7 +242,6 @@ function App() {
   }
   function getSavedCards() {
     setServerError('');
-    console.log(isLoading);
     setIsLoading(true);
     mainApi.getSavedCards()
       .then((cards) => {

@@ -1,5 +1,5 @@
 export const BASE_URL = 'https://api.veronika.movie.nomoredomainsicu.ru';
-
+// export const BASE_URL = 'http://localhost:4000';
 export const register = ({ email, password, name }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',

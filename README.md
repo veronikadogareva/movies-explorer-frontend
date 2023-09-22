@@ -66,3 +66,5 @@ npm start — запускает сервер
 ## Ссылки на приложение
 - [Фронтенд часть](https://veronika.movie.nomoredomainsrocks.ru)
 - [Бэкенд часть](https://api.veronika.movie.nomoredomainsrocks.ru)
+## Cсылка на пул-реквест
+https://github.com/veronikadogareva/movies-explorer-frontend/pull/2

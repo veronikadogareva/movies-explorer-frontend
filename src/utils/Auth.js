@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.veronika.movie.nomoredomainsicu.ru';
+export const BASE_URL = 'https://api.veronika.movie.nomoredomainsicu.ru';
 
 export const register = ({ email, password, name }) => {
   return fetch(`${BASE_URL}/signup`, {

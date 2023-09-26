@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import './Register.css';
+import { EMAIL_VALID, NAME_VALID } from '../../utils/constants';
 import WindowWithForm from '../WindowWithForm/WindowWithForm';
 import Input from '../Input/Input';
 import useFormControl from '../../utils/useFormControl';
@@ -16,12 +17,12 @@ function Register({ handleRegister, serverError }) {
   }
   return (
     <section className="register">
-      <WindowWithForm  title="Добро пожаловать!" textButton={isLoading ? "Сохранение..." : "Зарегистрироваться"} textCaption="Уже зарегистрированы?" textLink="Войти" linkPath="/signin"
-        name="form-register" handleSubmit={handleSubmit} buttonIsDisable={!inputControl.isValid} serverError={serverError}>
+      <WindowWithForm title="Добро пожаловать!" textButton={isLoading ? "Сохранение..." : "Зарегистрироваться"} textCaption="Уже зарегистрированы?" textLink="Войти" linkPath="/signin"
+        name="form-register" handleSubmit={handleSubmit} buttonIsDisable={!inputControl.isValid} serverError={serverError} isLoading={isLoading}>
         <Input type="text" name="name" labelText="Имя" placeholder="Введите имя" handleChange={inputControl.handleChange} value={inputControl.values.name}
-          error={name} minLength="2" maxLength="30" pattern="^[A-Za-zА-Яа-яЁё\s-]+$" />
+          error={name} minLength="2" maxLength="30" pattern={NAME_VALID} />
         <Input type="email" name="email" labelText="E-mail" placeholder="Введите email" handleChange={inputControl.handleChange} value={inputControl.values.email}
-          error={email} pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+          error={email} pattern={EMAIL_VALID} />
         <Input type="password" name="password" labelText="Пароль" placeholder="Введите пароль" handleChange={inputControl.handleChange} value={inputControl.values.password}
           error={password} />
       </WindowWithForm>

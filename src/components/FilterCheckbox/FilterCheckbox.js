@@ -1,9 +1,19 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
 import './FilterCheckbox.css';
-function FilterCheckbox({ setIsCheckbox, isCheckbox }) {
+import { useLocation } from 'react-router-dom';
+
+function FilterCheckbox({ isCheckbox, setIsCheckbox, filteringCards, searchWord }) {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/saved-movies') {
+      setIsCheckbox(false);
+    } else {
+      setIsCheckbox(JSON.parse(localStorage.getItem('isCheckbox')));
+    }
+  }, []);
   function handleCheckboxChange() {
     setIsCheckbox(!isCheckbox);
+    filteringCards(searchWord, !isCheckbox);
   }
   return (
     <div className="filter-checkbox">

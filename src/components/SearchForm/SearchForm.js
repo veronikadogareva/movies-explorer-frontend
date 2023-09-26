@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useLocation } from 'react-router-dom';
-function SearchForm({ searchCards, setIsCheckbox, isCheckbox }) {
+import { AppContext } from '../../contexts/AppContext';
+function SearchForm({ searchCards, setIsCheckbox, isCheckbox, filteringCards }) {
   const location = useLocation();
+  const { isLoading } = useContext(AppContext);
   const [searchFormState, setSearchFormState] = useState({
     errorText: '',
     searchWord: '',
     isFormValid: false,
   });
   useEffect(() => {
-    if (location.pathname==='/movies' && localStorage.getItem('searchWord')) {
+    if (location.pathname === '/movies' && localStorage.getItem('searchWord')) {
       setSearchFormState({ searchWord: JSON.parse(localStorage.getItem('searchWord')) });
     }
   }, []);
@@ -42,10 +44,10 @@ function SearchForm({ searchCards, setIsCheckbox, isCheckbox }) {
     <section className="search-form">
       <form className="search-form__form" name="form-search" onSubmit={handleSubmit}>
         <input className="search-form__input" id="search-input" type="text" name="searchWord" placeholder="Фильм" required onChange={handleInputChange} minLength='1' value={searchFormState.searchWord} />
-        <button className="search-form__button" type="submit" />
+        <button className="search-form__button" type="submit" disabled={isLoading} />
       </form>
       <span className="search-form__error">{searchFormState.errorText}</span>
-      <FilterCheckbox setIsCheckbox={setIsCheckbox} isCheckbox={isCheckbox} />
+      <FilterCheckbox isCheckbox={isCheckbox} setIsCheckbox={setIsCheckbox} filteringCards={filteringCards} searchWord={searchFormState.searchWord} />
     </section>
   )
 }

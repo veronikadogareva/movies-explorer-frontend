@@ -1,4 +1,4 @@
-const MOVIE_API_PATH_FOR_THUMBNAIL = 'https://api.nomoreparties.co/';
+import { MOVIE_API_PATH_FOR_THUMBNAIL, MAIN_API_URL, LOCALHOST_URL } from './constants';
 class MainApi {
   constructor(dataMainApi) {
     this._baseUrl = dataMainApi.baseUrl;
@@ -64,7 +64,7 @@ class MainApi {
       },
     });
   }
-  deleteCard(id){
+  deleteCard(id) {
     const token = localStorage.getItem('token');
     return this._request(`movies/${id}`, {
       method: 'DELETE',
@@ -77,8 +77,8 @@ class MainApi {
   checkTo
 }
 const mainApi = new MainApi({
-  baseUrl: 'https://api.veronika.movie.nomoredomainsicu.ru',
-  // baseUrl: 'http://localhost:4000',
+  // baseUrl: MAIN_API_URL,
+  baseUrl: LOCALHOST_URL,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
     'Content-Type': 'application/json'

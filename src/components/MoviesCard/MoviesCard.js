@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 function MoviesCard({ card, img, title, duration, saveOrDeleteCard , isAlreadySaved }) {
   const location = useLocation();
 
   function handleClick() {
-    saveOrDeleteCard(card);
+    saveOrDeleteCard(location.pathname === '/saved-movies' ? card._id : card);
   }
   function countDuration() {
     const hour = Math.floor(duration / 60);

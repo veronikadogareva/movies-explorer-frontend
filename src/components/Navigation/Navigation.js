@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import './Navigation.css';
 import Menu from '../Menu/Menu';
-function Navigation({}) {
+function Navigation({ }) {
   const location = useLocation();
   const [isMenu, setIsMenu] = useState(false);
   function handleMenuButton() {

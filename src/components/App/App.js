@@ -5,6 +5,7 @@ import './App.css';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { AppContext } from '../../contexts/AppContext';
 import photoStudent from '../../images/student.png';
+import { WINDOW_WIDTH_768, WINDOW_WIDTH_400, VISIBLE_CARDS_16, VISIBLE_CARDS_8, VISIBLE_CARDS_5, CONFLICT_ERROR, UNAUTHORIZED_ERROR, SHORT_MOVIE_DURATION } from '../../utils/constants';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -39,12 +40,12 @@ function App() {
     function handleResize() {
       setWindowWidth(window.innerWidth);
     };
-    if (windowWidth > 768) {
-      setVisibleCards(16);
-    } else if (windowWidth > 400) {
-      setVisibleCards(8);
+    if (windowWidth > WINDOW_WIDTH_768) {
+      setVisibleCards(VISIBLE_CARDS_16);
+    } else if (windowWidth > WINDOW_WIDTH_400) {
+      setVisibleCards(VISIBLE_CARDS_8);
     } else {
-      setVisibleCards(5);
+      setVisibleCards(VISIBLE_CARDS_5);
     };
     window.addEventListener('resize', handleResize);
     return () => {
@@ -59,8 +60,8 @@ function App() {
     if (localStorage.getItem('isCheckbox')) {
       setIsCheckbox(JSON.parse(localStorage.getItem('isCheckbox')));
     }
-    if (localStorage.getItem('savedCards')) {
-      setSavedCards(JSON.parse(localStorage.getItem('savedCards')));
+    if (localStorage.getItem('AllSavedCards')) {
+      setSavedCards(JSON.parse(localStorage.getItem('AllSavedCards')));
     }
   }, []);
   React.useEffect(() => {
@@ -82,9 +83,7 @@ function App() {
           getSavedCards();
         })
         .then(() => {
-          if (location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === 'profile') {
-            navigate(location.pathname);
-          }
+          navigate(location.pathname);
         })
         .catch((err) => {
           console.error(err);
@@ -95,7 +94,7 @@ function App() {
     }
   }
   function clearServerError() {
-    setTimeout(() => setServerError(''), 10000);
+    setTimeout(() => setServerError(''), 4000);
   }
   function handleRegister({ email, password, name }) {
     setServerError('');
@@ -106,7 +105,7 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
-        setServerError(err.status === 409 ? 'Пользователь с таким email уже зарегистрирован' : 'При регистрации пользователя произошла ошибка.');
+        setServerError(err.status === CONFLICT_ERROR ? 'Пользователь с таким email уже зарегистрирован' : 'При регистрации пользователя произошла ошибка.');
       })
       .finally(() => {
         setIsLoading(false);
@@ -119,14 +118,24 @@ function App() {
     authorize({ email, password })
       .then((data) => {
         if (data.token) {
+          setLoggedIn(true);
           localStorage.setItem('token', data.token);
-          tokenCheck();
+          mainApi.getUserInfo()
+            .then((data) => {
+              setUserInfo(data);
+              setLoggedIn(true);
+              getSavedCards();
+            })
+            .then(navigate('/movies'))
+            .catch((err) => {
+              console.error(err);
+              setServerError(err.status === UNAUTHORIZED_ERROR ? 'Вы ввели неправильный логин или пароль.' : 'При авторизации произошла ошибка.');
+            })
         }
       })
-      .then(() => navigate('/movies'))
       .catch((err) => {
         console.error(err);
-        setServerError(err.status === 401 ? 'Вы ввели неправильный логин или пароль.' : 'При авторизации произошла ошибка.');
+        setServerError(err.status === UNAUTHORIZED_ERROR ? 'Вы ввели неправильный логин или пароль.' : 'При авторизации произошла ошибка.');
       })
       .finally(() => {
         setIsLoading(false);
@@ -143,10 +152,11 @@ function App() {
       .then((data) => {
         setUserInfo(data);
         setIsEditButtonOpen(!isEditButtonOpen);
+        setServerError('Данные успешно обновлены.');
       })
       .catch((err) => {
         console.error(err);
-        setServerError(err.status === 409 ? 'Пользователь с таким email уже существует.' : 'При обновлении профиля произошла ошибка.');
+        setServerError(err.status === CONFLICT_ERROR ? 'Пользователь с таким email уже существует.' : 'При обновлении профиля произошла ошибка.');
       })
       .finally(() => {
         setIsLoading(false);
@@ -156,70 +166,96 @@ function App() {
   function searchCards(searchWord) {
     setServerError('');
     setIsLoading(true);
-    moviesApi.getCards()
-      .then((data) => {
-        localStorage.setItem('searchWord', JSON.stringify(searchWord));
-        localStorage.setItem('isCheckbox', JSON.stringify(isCheckbox));
-        const filteredCards = data.filter((card) => {
-          const titleRu = card.nameRU.toLowerCase();
-          const titleEn = card.nameEN.toLowerCase();
-          const isTitleMatch = (titleRu.includes(searchWord) || titleEn.includes(searchWord));
-          if (isCheckbox && isTitleMatch) {
-            return true;
-          }
-          if (!isCheckbox && card.duration >= 40 && isTitleMatch) {
-            return true;
-          }
-          return false;
+    if (!JSON.parse(localStorage.getItem('allCards'))) {
+      moviesApi.getCards()
+        .then((data) => {
+          localStorage.setItem('searchWord', JSON.stringify(searchWord));
+          localStorage.setItem('allCards', JSON.stringify(data));
+        })
+        .then(() => {
+          filteringCards(searchWord, isCheckbox);
+        })
+        .catch((err) => {
+          console.error(err);
+          setServerError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+        })
+        .finally(() => {
+          setIsLoading(false);
+          clearServerError();
         });
-        localStorage.setItem('cards', JSON.stringify(filteredCards));
-        if (filteredCards.length !== 0) {
-          setCards(filteredCards);
-        } else {
-          setServerError('Ничего не найдено.');
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setServerError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
-      })
-      .finally(() => {
-        setIsLoading(false);
-        clearServerError();
-      });
+    } else {
+      setIsLoading(false);
+      filteringCards(searchWord, isCheckbox);
+    }
   }
-  function searchSavedCards(searchWord) {
+  function filteringCards(searchWord, isCheckboxNow) {
     setServerError('');
-    const savedCardsFromLocalStorage = JSON.parse(localStorage.getItem('savedCards'));
-    const filteredCards = savedCardsFromLocalStorage.filter((card) => {
+    let allCards;
+    if (location.pathname === '/movies') {
+      localStorage.setItem('isCheckbox', JSON.stringify(isCheckboxNow));
+      allCards = JSON.parse(localStorage.getItem('allCards'));
+    } else {
+      allCards = JSON.parse(localStorage.getItem('allSavedCards'));
+    }
+    if (!allCards) {
+      return;
+    }
+    const filteredCards = allCards.filter((card) => {
       const titleRu = card.nameRU.toLowerCase();
       const titleEn = card.nameEN.toLowerCase();
       const isTitleMatch = (titleRu.includes(searchWord) || titleEn.includes(searchWord));
-      if (isCheckbox && isTitleMatch) {
+      if (isTitleMatch && isCheckboxNow && card.duration <= SHORT_MOVIE_DURATION) {
         return true;
       }
-      if (!isCheckbox && card.duration >= 40 && isTitleMatch) {
+      if (isTitleMatch && !isCheckboxNow) {
         return true;
       }
       return false;
     });
-    if (filteredCards.length !== 0) {
-      setSavedCards(filteredCards);
+
+    if (location.pathname === '/movies') {
+      localStorage.setItem('cards', JSON.stringify(filteredCards));
+      if (filteredCards.length !== 0) {
+        setCards(filteredCards);
+      } else {
+        setCards([]);
+        setServerError('Ничего не найдено.');
+      }
     } else {
-      setSavedCards([]);
-      setServerError('Ничего не найдено.');
-      clearServerError();
+      if (filteredCards.length !== 0) {
+        setSavedCards(filteredCards);
+      } else {
+        setSavedCards([]);
+        setServerError('Ничего не найдено.');
+      }
     }
+  }
+  function searchSavedCards(searchWord) {
+    // setServerError('');
+    // const savedCardsFromLocalStorage = JSON.parse(localStorage.getItem('AllSavedCards'));
+    // const filteredCards = savedCardsFromLocalStorage.filter((card) => {
+    //   const titleRu = card.nameRU.toLowerCase();
+    //   const titleEn = card.nameEN.toLowerCase();
+    //   const isTitleMatch = (titleRu.includes(searchWord) || titleEn.includes(searchWord));
+    //   if (isTitleMatch && isCheckbox && card.duration <= 40) {
+    //     return true;
+    //   }
+    //   if (isTitleMatch && !isCheckbox) {
+    //     return true;
+    //   }
+    //   return false;
+    // });
+    // if (filteredCards.length !== 0) {
+    //   setSavedCards(filteredCards);
+    // } else {
+    //   setSavedCards([]);
+    //   setServerError('Ничего не найдено.');
+    // }
+    filteringCards(searchWord, isCheckbox);
   }
   function saveOrDeleteCard(card) {
     if (isMovieAlreadySaved(card)) {
-      setIsLoading(true);
-      mainApi.deleteCard(getHexId(card))
-        .then((card) => {
-          setSavedCards((state) => state.filter((c) => c._id !== card._id));
-        })
-        .catch(console.error)
-        .finally(setIsLoading(false));
+      deleteCard(getHexId(card));
     } else {
       setIsLoading(true);
       mainApi.postNewCard(card)
@@ -230,12 +266,11 @@ function App() {
         .finally(setIsLoading(false));
     }
   }
-  function deleteCard(card) {
+  function deleteCard(cardId) {
     setIsLoading(true);
-
-    mainApi.deleteCard(card._id)
+    mainApi.deleteCard(cardId)
       .then((card) => {
-        setSavedCards((state) => state.filter((c) => c._id !== card._id));
+        getSavedCards();
       })
       .catch(console.error)
       .finally(setIsLoading(false));
@@ -246,7 +281,7 @@ function App() {
     mainApi.getSavedCards()
       .then((cards) => {
         if (cards) {
-          localStorage.setItem('savedCards', JSON.stringify(cards));
+          localStorage.setItem('allSavedCards', JSON.stringify(cards));
           setSavedCards(cards);
         }
         else {
@@ -263,7 +298,7 @@ function App() {
       });
   }
   function handleButtonMore() {
-    if (visibleCards >= 5) {
+    if (visibleCards >= VISIBLE_CARDS_5) {
       setAddedCards(addedCards + Math.min(Math.ceil(visibleCards / 4), 4));
     } else {
       setAddedCards(addedCards * 2);
@@ -271,7 +306,12 @@ function App() {
   }
   function handleExit() {
     localStorage.clear();
-    tokenCheck();
+    navigate('/');
+    setUserInfo({});
+    setLoggedIn(false);
+    setIsCheckbox(false);
+    setCards([]);
+    setSavedCards([]);
   }
   function isMovieAlreadySaved(card) {
     if (savedCards) {
@@ -304,6 +344,7 @@ function App() {
             saveOrDeleteCard={saveOrDeleteCard}
             isMovieAlreadySaved={isMovieAlreadySaved}
             serverError={serverError}
+            filteringCards={filteringCards}
           />} />
           <Route path="/saved-movies" element={<ProtectedRoute
             element={SavedMovies}
@@ -311,9 +352,10 @@ function App() {
             saveOrDeleteCard={deleteCard}
             isMovieAlreadySaved={isMovieAlreadySaved}
             searchSavedCards={searchSavedCards}
-            setIsCheckbox={setIsCheckbox}
             isCheckbox={isCheckbox}
-            serverError={serverError} />} />
+            setIsCheckbox={setIsCheckbox}
+            serverError={serverError}
+            filteringCards={filteringCards} />} />
           <Route path="/profile" element={<ProtectedRoute
             handleOpenEditButton={handleOpenEditButton}
             isEditButtonOpen={isEditButtonOpen}

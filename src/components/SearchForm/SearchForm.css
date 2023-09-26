@@ -49,18 +49,25 @@
   cursor: pointer;
 }
 
+.search-form__button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 .search-form__button:hover {
   opacity: 0.8;
 }
+
 .search-form__error {
   color: #FF004C;
   font-size: 11px;
   line-height: 13.31px;
-  margin: 2px 25px 0 ;
+  margin: 2px 25px 0;
   height: 14px;
   text-align: start;
   align-self: flex-start;
 }
+
 @media screen and (max-width:768px) {
   .search-form__form {
     margin-top: 77px;
@@ -73,11 +80,12 @@
     width: 100%;
     margin-top: 78px;
   }
+
   .search-form__input {
     height: 46px;
     font-size: 11px;
     line-height: 17px;
     text-indent: 19px;
   }
-  
+
 }

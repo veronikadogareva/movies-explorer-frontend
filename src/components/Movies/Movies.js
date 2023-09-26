@@ -4,11 +4,11 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import { AppContext } from '../../contexts/AppContext';
-function Movies({ searchCards, cards, setIsCheckbox, isCheckbox, handleButtonMore, visibleCards, addedCards, saveOrDeleteCard, isMovieAlreadySaved, serverError }) {
+function Movies({ searchCards, cards, isCheckbox, setIsCheckbox, handleButtonMore, visibleCards, addedCards, saveOrDeleteCard, isMovieAlreadySaved, serverError, filteringCards }) {
   const { isLoading } = useContext(AppContext);
   return (
     <section className="movies">
-      <SearchForm searchCards={searchCards} setIsCheckbox={setIsCheckbox} isCheckbox={isCheckbox}/>
+      <SearchForm searchCards={searchCards} isCheckbox={isCheckbox} setIsCheckbox={setIsCheckbox} filteringCards={filteringCards}/>
       {isLoading ? <Preloader /> : <>
         {serverError !== "" ? <span className="movies__error">{serverError}</span> :
           <>

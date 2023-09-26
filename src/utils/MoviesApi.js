@@ -1,3 +1,4 @@
+import { MOVIE_API } from './constants';
 class MoviesApi {
   constructor(dataMoviesApi) {
     this._baseUrl = dataMoviesApi.baseUrl;
@@ -22,7 +23,7 @@ class MoviesApi {
   }
 }
 const moviesApi = new MoviesApi({
-  baseUrl: ' https://api.nomoreparties.co',
+  baseUrl: MOVIE_API,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
     'Content-Type': 'application/json'

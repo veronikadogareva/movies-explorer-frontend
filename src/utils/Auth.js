@@ -12,7 +12,7 @@ export const register = ({ email, password, name }) => {
 };
 
 export const authorize = ({ email, password }) => {
-  return fetch(`${LOCALHOST_URL}/signin`, {
+  return fetch(`${MAIN_API_URL}/signin`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

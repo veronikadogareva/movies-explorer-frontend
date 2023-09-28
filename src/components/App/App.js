@@ -366,7 +366,8 @@ function App() {
             element={Profile}
             handleExit={handleExit}
             userInfo={userInfo}
-            handleUpdateUserUnfo={handleUpdateUserUnfo} />} />
+            handleUpdateUserUnfo={handleUpdateUserUnfo}
+            setIsEditButtonOpen={setIsEditButtonOpen} />} />
         </Routes>
         {showFooter && <Footer />}
       </AppContext.Provider>

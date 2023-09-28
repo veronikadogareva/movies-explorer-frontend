@@ -5,13 +5,14 @@ import ProfileInput from '../ProfileInput/ProfileInput';
 import Button from '../Button/Button';
 import useFormControl from '../../utils/useFormControl';
 import { AppContext } from '../../contexts/AppContext';
-function Profile({ handleOpenEditButton, isEditButtonOpen, handleExit, userInfo, handleUpdateUserUnfo, serverError }) {
+function Profile({ handleOpenEditButton, isEditButtonOpen, handleExit, userInfo, handleUpdateUserUnfo, serverError, setIsEditButtonOpen }) {
   const [isInfoUnchanged, setIsInfoUnchanged] = useState(false);
   const [isValid, setIsValid] = useState();
   const { isLoading } = useContext(AppContext);
   const inputControl = useFormControl({ name: userInfo.name, email: userInfo.email });
   useEffect(() => {
     inputControl.setIsValid(true);
+    setIsEditButtonOpen(false);
   }, []);
 
   useEffect(() => {

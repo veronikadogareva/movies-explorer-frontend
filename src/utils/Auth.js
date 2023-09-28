@@ -1,6 +1,6 @@
 import { MAIN_API_URL, LOCALHOST_URL } from './constants';
 export const register = ({ email, password, name }) => {
-  return fetch(`${LOCALHOST_URL}/signup`, {
+  return fetch(`${MAIN_API_URL}/signup`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -12,7 +12,7 @@ export const register = ({ email, password, name }) => {
 };
 
 export const authorize = ({ email, password }) => {
-  return fetch(`${LOCALHOST_URL}/signin`, {
+  return fetch(`${MAIN_API_URL}/signin`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

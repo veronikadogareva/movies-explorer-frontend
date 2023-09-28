@@ -77,7 +77,7 @@ class MainApi {
   checkTo
 }
 const mainApi = new MainApi({
-  baseUrl: LOCALHOST_URL,
+  baseUrl: MAIN_API_URL,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
     'Content-Type': 'application/json'

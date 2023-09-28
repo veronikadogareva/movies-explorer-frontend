@@ -13,7 +13,7 @@ function SearchForm({ searchCards, setIsCheckbox, isCheckbox, filteringCards }) 
   });
   useEffect(() => {
     if (location.pathname === '/movies' && localStorage.getItem('searchWord')) {
-      setSearchFormState({ searchWord: JSON.parse(localStorage.getItem('searchWord')) });
+      setSearchFormState({ searchWord: JSON.parse(localStorage.getItem('searchWord')), isFormValid: true, });
     }
   }, []);
   function handleInputChange(evt) {

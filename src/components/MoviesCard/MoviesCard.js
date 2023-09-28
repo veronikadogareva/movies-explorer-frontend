@@ -4,7 +4,8 @@ import { useLocation } from 'react-router-dom';
 function MoviesCard({ card, img, title, duration, saveOrDeleteCard , isAlreadySaved }) {
   const location = useLocation();
 
-  function handleClick() {
+  function handleClick(evt) {
+    evt.preventDefault();
     saveOrDeleteCard(location.pathname === '/saved-movies' ? card._id : card);
   }
   function countDuration() {

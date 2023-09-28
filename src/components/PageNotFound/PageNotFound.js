@@ -5,7 +5,7 @@ import './PageNotFound.css';
 function PageNotFound() {
   const navigate = useNavigate();
   function handleGoBack() {
-    navigate(-1);
+    navigate(-2);
   }
   return (
     <section className="page-not-found">

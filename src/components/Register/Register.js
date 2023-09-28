@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Register.css';
 import { EMAIL_VALID, NAME_VALID } from '../../utils/constants';
 import WindowWithForm from '../WindowWithForm/WindowWithForm';
@@ -8,8 +8,11 @@ import { AppContext } from '../../contexts/AppContext';
 function Register({ handleRegister, serverError }) {
   const { isLoading } = useContext(AppContext);
   const inputControl = useFormControl({ name: '', email: '', password: '' });
+  const [isValid, setIsValid] = useState(false);
   const { name, email, password } = inputControl.errors;
-
+  useEffect(() => {
+    setIsValid(inputControl.isValid);
+  }, [inputControl.isValid]);
   function handleSubmit(e) {
     e.preventDefault();
     handleRegister(inputControl.values);
@@ -18,7 +21,7 @@ function Register({ handleRegister, serverError }) {
   return (
     <section className="register">
       <WindowWithForm title="Добро пожаловать!" textButton={isLoading ? "Сохранение..." : "Зарегистрироваться"} textCaption="Уже зарегистрированы?" textLink="Войти" linkPath="/signin"
-        name="form-register" handleSubmit={handleSubmit} buttonIsDisable={!inputControl.isValid} serverError={serverError} isLoading={isLoading}>
+        name="form-register" handleSubmit={handleSubmit} buttonIsDisable={!isValid} serverError={serverError} isLoading={isLoading}>
         <Input type="text" name="name" labelText="Имя" placeholder="Введите имя" handleChange={inputControl.handleChange} value={inputControl.values.name}
           error={name} minLength="2" maxLength="30" pattern={NAME_VALID} />
         <Input type="email" name="email" labelText="E-mail" placeholder="Введите email" handleChange={inputControl.handleChange} value={inputControl.values.email}

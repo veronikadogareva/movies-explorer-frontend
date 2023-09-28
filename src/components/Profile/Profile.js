@@ -22,7 +22,7 @@ function Profile({ handleOpenEditButton, isEditButtonOpen, handleExit, userInfo,
     }
   }, [inputControl.values.name, inputControl.values.email]);
   useEffect(() => {
-    setIsValid(inputControl.isValid && isInfoUnchanged && !isLoading)
+    setIsValid(inputControl.isValid && isInfoUnchanged && !isLoading);
   }, [isInfoUnchanged, inputControl.isValid]);
   const { name, email } = inputControl.errors;
   function handleSubmit(e) {

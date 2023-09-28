@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import { AppContext } from '../../contexts/AppContext';
-function Movies({ searchCards, cards, isCheckbox, setIsCheckbox, handleButtonMore, visibleCards, addedCards, saveOrDeleteCard, isMovieAlreadySaved, serverError, filteringCards }) {
+function Movies({ searchCards, cards, isCheckbox, setIsCheckbox, handleButtonMore, visibleCards, addedCards, saveOrDeleteCard, isMovieAlreadySaved, serverError, filteringCards, setServerError }) {
   const { isLoading } = useContext(AppContext);
+  useEffect(()=>{
+    setServerError('');
+  }, []);
   return (
     <section className="movies">
       <SearchForm searchCards={searchCards} isCheckbox={isCheckbox} setIsCheckbox={setIsCheckbox} filteringCards={filteringCards}/>

@@ -257,27 +257,22 @@ function App() {
     if (isMovieAlreadySaved(card)) {
       deleteCard(getHexId(card));
     } else {
-      setIsLoading(true);
       mainApi.postNewCard(card)
         .then((newCard) => {
           getSavedCards();
         })
         .catch(console.error)
-        .finally(setIsLoading(false));
     }
   }
   function deleteCard(cardId) {
-    setIsLoading(true);
     mainApi.deleteCard(cardId)
       .then((card) => {
         getSavedCards();
       })
-      .catch(console.error)
-      .finally(setIsLoading(false));
+      .catch(console.error);
   }
   function getSavedCards() {
     setServerError('');
-    setIsLoading(true);
     mainApi.getSavedCards()
       .then((cards) => {
         if (cards) {
@@ -293,7 +288,6 @@ function App() {
         setServerError('На сервере произошла ошибка.');
       })
       .finally(() => {
-        setIsLoading(false);
         clearServerError();
       });
   }
@@ -329,8 +323,14 @@ function App() {
         {showHeader && <Header />}
         <Routes>
           <Route path="*" element={<PageNotFound />} />
-          <Route path="/signup" element={<Register handleRegister={handleRegister} serverError={serverError} />} />
-          <Route path="/signin" element={<Login handleLogin={handleLogin} serverError={serverError} />} />
+          <Route path="/signup" element={<ProtectedRoute
+            element={Register}
+            handleRegister={handleRegister}
+            serverError={serverError} />} />
+          <Route path="/signin" element={<ProtectedRoute
+            element={Login}
+            handleLogin={handleLogin}
+            serverError={serverError} />} />
           <Route path="/" element={<Main photoStudent={photoStudent} />} />
           <Route path="/movies" element={<ProtectedRoute
             element={Movies}
@@ -345,6 +345,7 @@ function App() {
             isMovieAlreadySaved={isMovieAlreadySaved}
             serverError={serverError}
             filteringCards={filteringCards}
+            setServerError={setServerError}
           />} />
           <Route path="/saved-movies" element={<ProtectedRoute
             element={SavedMovies}
@@ -355,7 +356,9 @@ function App() {
             isCheckbox={isCheckbox}
             setIsCheckbox={setIsCheckbox}
             serverError={serverError}
-            filteringCards={filteringCards} />} />
+            filteringCards={filteringCards}
+            setServerError={setServerError}
+            setSavedCards={setSavedCards} />} />
           <Route path="/profile" element={<ProtectedRoute
             handleOpenEditButton={handleOpenEditButton}
             isEditButtonOpen={isEditButtonOpen}

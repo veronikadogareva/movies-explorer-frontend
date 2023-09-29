@@ -9,14 +9,18 @@ function Register({ handleRegister, serverError }) {
   const { isLoading } = useContext(AppContext);
   const inputControl = useFormControl({ name: '', email: '', password: '' });
   const [isValid, setIsValid] = useState(false);
+  useEffect(() => {
+
+  }, []);
   const { name, email, password } = inputControl.errors;
   useEffect(() => {
     setIsValid(inputControl.isValid);
   }, [inputControl.isValid]);
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(inputControl.values.name);
     handleRegister(inputControl.values);
-    inputControl.resetForm({ email: '', password: '' });
+    inputControl.resetForm({ name: '', email: '', password: '' });
   }
   return (
     <section className="register">

@@ -18,7 +18,6 @@ function Register({ handleRegister, serverError }) {
   }, [inputControl.isValid]);
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(inputControl.values.name);
     handleRegister(inputControl.values);
     inputControl.resetForm({ name: '', email: '', password: '' });
   }

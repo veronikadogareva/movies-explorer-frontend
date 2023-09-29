@@ -9,7 +9,7 @@ function SavedMovies({ savedCards, saveOrDeleteCard, isMovieAlreadySaved, search
   useEffect(() => {
     setServerError('');
     setSavedCards(JSON.parse(localStorage.getItem('allSavedCards')));
-  },[]);
+  }, []);
   return (
     <section className="movies">
       <SearchForm searchCards={searchSavedCards} isCheckbox={isCheckbox} setIsCheckbox={setIsCheckbox} filteringCards={filteringCards} />

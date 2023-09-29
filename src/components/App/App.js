@@ -32,6 +32,7 @@ function App() {
   const [isEditButtonOpen, setIsEditButtonOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const allPath = ["/", "/movies", "/saved-movies", "/profile", "/signin", "/signup"];
   const pathsForFooter = ["/", "/movies", "/saved-movies"];
   const pathsForHeader = pathsForFooter + "/profile";
   const showHeader = pathsForHeader.includes(location.pathname);
@@ -83,7 +84,9 @@ function App() {
           getSavedCards();
         })
         .then(() => {
-          navigate(location.pathname);
+          if (allPath.includes(location.pathname)) {
+            navigate(location.pathname);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -259,15 +262,19 @@ function App() {
     } else {
       mainApi.postNewCard(card)
         .then((newCard) => {
-          getSavedCards();
+          const array = [newCard, ...savedCards];
+          setSavedCards(array);
+          localStorage.setItem('allSavedCards', JSON.stringify(array));
         })
-        .catch(console.error)
+        .catch(console.error);
     }
   }
   function deleteCard(cardId) {
     mainApi.deleteCard(cardId)
-      .then((card) => {
-        getSavedCards();
+      .then(() => {
+        const array = savedCards.filter((card) => card._id !== cardId);
+        setSavedCards(array);
+        localStorage.setItem('allSavedCards', JSON.stringify(array));
       })
       .catch(console.error);
   }

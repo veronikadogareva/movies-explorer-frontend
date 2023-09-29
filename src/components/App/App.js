@@ -262,7 +262,7 @@ function App() {
     } else {
       mainApi.postNewCard(card)
         .then((newCard) => {
-          const array = [newCard, ...savedCards];
+          const array = [...savedCards, newCard];
           setSavedCards(array);
           localStorage.setItem('allSavedCards', JSON.stringify(array));
         })
